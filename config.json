@@ -1,0 +1,11 @@
+{
+  "demo": {
+    "v1": [
+      "localhost:12341",
+      "localhost:12342"
+    ],
+    "v2": [
+      "localhost:9090"
+    ]
+  }
+}
