@@ -28,7 +28,7 @@ func RegistryHandler(reg *proxy.DefaultRegistry)  {
 	})
 }
 
-func addServer(reg *proxy.DefaultRegistry) func(http.ResponseWriter, *http.Request) {
+func addServer(reg *proxy.DefaultRegistry) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 
@@ -46,7 +46,7 @@ func addServer(reg *proxy.DefaultRegistry) func(http.ResponseWriter, *http.Reque
 }
 
 
-func delServer(reg *proxy.DefaultRegistry) func(http.ResponseWriter, *http.Request) {
+func delServer(reg *proxy.DefaultRegistry) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 
@@ -59,7 +59,7 @@ func delServer(reg *proxy.DefaultRegistry) func(http.ResponseWriter, *http.Reque
 }
 
 
-func serverInfo(reg *proxy.DefaultRegistry) func(http.ResponseWriter, *http.Request) {
+func serverInfo(reg *proxy.DefaultRegistry) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, req *http.Request) {
 		servers := util.GetRedisSetList(util.SERVER_KYE_IN_REDIS)
@@ -79,7 +79,7 @@ func scheduleRunSync(reg *proxy.DefaultRegistry) {
 }
 
 func syncServerToLocal(reg *proxy.DefaultRegistry)  {
-	localValues,_:=reg.Values()
+	localValues :=reg.Values()
 	servers := util.GetRedisSetList(util.SERVER_KYE_IN_REDIS)
 	//缓存为空不更新,数据相等不更新
 	if len(servers) == 0 || checkEQS(localValues, servers){

@@ -69,7 +69,6 @@ func loadBalance(network, serviceName, serviceVersion string, reg Registry) (net
 			endpoints = append(endpoints[:i], endpoints[i+1:]...)
 			continue
 		}
-		endpoints = nil
 		// Success: return the connection.
 		return conn, nil
 	}
